@@ -1,9 +1,5 @@
-/* document.addEventListener('DOMContentLoaded', () => {
-    alert('LOADED');
-}) */
+const createShoesForm = document.querySelector("create-shoes-form")
+createShoesForm.addEventListener("submit", (e) => createFormHandler(e))
 
-function test() {
-    console.log('This is working')
-}
 
-test()
+

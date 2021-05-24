@@ -6,29 +6,30 @@ class FetchRequest {
     getShoes() {
         return fetch (`${this.url}/shoes`)
         .then(response => response.json())
-    }
+        .then(shoe => {
+            shoe.data.forEach(shoes => {
+                let newShoes = new Shoes(shoes, shoes.attributes)
 
-    fetchCreateShoes() {
-        return fetch(`${this.url}/shoes`, {
-            method: "POST" ,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ 
-                name: event.target[0].value,
-                description: event.target[0].value,
-                image: event.target[0].value
+                document.querySelector('#shoes-container').innerHTML += newShoes.renderShoesCard()
             })
         })
-        .then(response => response.json())
     }
-    fetchRemoveShoe() {
-        return fetch(`${this.url}/students/${id}`, {
-            method: "DELETE", 
-            headers: {
-                "Content-Type": "application/json"
-            }
+
+    postFetch(title, description, image) {
+        const bodyData = {title, description, image}
+
+        fetch(`${this.url}/shoes`, {
+            method: "POST",
+            headers: {"Content-Type": application/json},
+            body: JSON.stringify(bodyData)
         })
         .then(response => response.json())
+        .then(shoes => {
+            const shoesData = shoes.data
+
+            let newShoes = new Shoes(shoesData, shoesData.attributes)
+            document.querySelector('#shoes-container').innerHTML += newShoes.renderShoesCard
+        })
     }
+
 }
